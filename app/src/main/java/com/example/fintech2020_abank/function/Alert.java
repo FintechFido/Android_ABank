@@ -37,7 +37,7 @@ public class Alert extends AppCompatActivity {
         }
         else if(mode.equals("transfer")){
             builder.setTitle("알림").setMessage("송금이 완료되었습니다");
-            setneutralButton("normal",context);
+            setneutralButton("main",context);
             // 송금 완료 페이지던 상대 확인 페이지던 이동해야할 것 같음
         }
         else if(mode.equals("fail")){

@@ -38,7 +38,7 @@ public class Transfer extends Activity {
                 intent.putExtra("account", ""+account.getText());
                 intent.putExtra("price",""+price.getText());
                 intent.putExtra("name", ""+name.getText());
-                startActivityForResult(intent, 3000);
+                startActivityForResult(intent, 3000); // 3000번은 입금자 확인
             }
         });
     }

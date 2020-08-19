@@ -85,22 +85,6 @@ public class Check_depositor extends Activity {
 
     public void transfer_auth() {
         // 송금 및 인증
-        // 챌린지 넘버 HIDO에서 받아서 진행해야 한다..
-        /*
-        Call_HIDO call_hido = new Call_HIDO();
-            if(call_hido.exist_check(Transfer.this)) {
-                Intent intent = new Intent();
-                intent.setClassName("com.example.fintech_hido","com.example.fintech_hido.function.Fingerprint_function");
-                intent.putExtra("mode", "auth");
-                intent.putExtra("session_key", User.getInstance().get_session_key());
-                intent.putExtra("imei",User.getInstance().get_imei());
-                intent.putExtra("running",User.getInstance().get_running_code());
-                startActivityForResult(intent,1000);
-            }
-            else{
-                Alert.alert_function(Transfer.this, "exist");
-            }
-         */
 
         // 지문 정보가 존재하는지 확인
         Call_HIDO call_hido = new Call_HIDO();
@@ -117,16 +101,6 @@ public class Check_depositor extends Activity {
         else{
             Alert.alert_function(Check_depositor.this, "exist");
         }
-
-        //
-
-
-        /*
-        Intent intent = new Intent();
-        setResult(2000,intent);
-        finish();
-
-         */
     }
 
     @Override
@@ -140,7 +114,12 @@ public class Check_depositor extends Activity {
         else {
             ;
             // 2000. 송금 위해 인증까지 한 뒤 결과
-
+            if(getIntent().getExtras().getString("result").equals("true")) {
+                Alert.alert_function(Check_depositor.this,"transfer");
+            }
+            else {
+                Alert.alert_function(Check_depositor.this, "main");
+            }
         }
     }
 
