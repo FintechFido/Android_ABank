@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fintech2020_abank.R;
+import com.example.fintech2020_abank.model.User;
 import com.example.fintech2020_abank.network.SSL_Connection;
 import com.example.fintech2020_abank.network.SendRequest;
 
@@ -22,6 +24,7 @@ public class Check_depositor extends Activity {
     private String name;
     private ProgressBar progressBar;
     private Button btn;
+    private Spinner spinner;
 
     // 뒤로가기 하면 처리되도록 해야 한다
 
@@ -37,6 +40,7 @@ public class Check_depositor extends Activity {
         account = getIntent().getExtras().getString("account").toString();
         name = getIntent().getExtras().getString("name").toString();
         progressBar = (ProgressBar)findViewById(R.id.check_depositor_progressBar);
+        spinner = (Spinner)findViewById(R.id.spinner_saved_select);
 
         confirm();
         // 사용자 확인
@@ -98,6 +102,25 @@ public class Check_depositor extends Activity {
             }
          */
 
+        // 지문 정보가 존재하는지 확인
+        Call_HIDO call_hido = new Call_HIDO();
+        if(call_hido.exist_check(Check_depositor.this)) {
+            Intent intent = new Intent();
+            intent.setClassName("com.example.fintech_hido","com.example.fintech_hido.function.Fingerprint_function");
+            intent.putExtra("mode", "auth_check");
+            intent.putExtra("session_key", User.getInstance().get_session_key());
+            intent.putExtra("imei",User.getInstance().get_imei());
+            intent.putExtra("running",User.getInstance().get_running_code());
+            intent.putExtra("saved",spinner.getSelectedItem().toString()+"");
+            startActivityForResult(intent,4000);
+        }
+        else{
+            Alert.alert_function(Check_depositor.this, "exist");
+        }
+
+        //
+
+
         /*
         Intent intent = new Intent();
         setResult(2000,intent);
@@ -105,4 +128,20 @@ public class Check_depositor extends Activity {
 
          */
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == 4000) {
+            // 입금자 정보 확인 실패한 경우 리턴됨
+            ;
+        }
+        else {
+            ;
+            // 2000. 송금 위해 인증까지 한 뒤 결과
+
+        }
+    }
+
 }
