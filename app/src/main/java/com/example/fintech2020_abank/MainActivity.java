@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.fintech2020_abank.function.Register_fingerprint;
 import com.example.fintech2020_abank.function.Transfer;
@@ -69,6 +70,22 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
+
+        get_balance();
     }
 
+    public void get_balance() {
+        SendRequest sendRequest = new SendRequest();
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("session_key", User.getInstance().get_session_key());
+        System.out.println("CHECK : "+hashMap);
+        sendRequest.send("https://"+ SSL_Connection.getSsl_connection().get_url()+"/user/balance",
+                1, hashMap, MainActivity.this);
+    }
+
+    public void update_balance(String string) {
+        TextView textView = (TextView)findViewById(R.id.tv_balance_value);
+        textView.setText(string+" 원");
+
+    }
 }

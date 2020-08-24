@@ -64,7 +64,7 @@ public class Check_depositor extends Activity {
         hashMap.put("account_code", account);
         System.out.println("CHECK : "+hashMap);
         sendRequest.send("https://"+ SSL_Connection.getSsl_connection().get_url()+"/user/valid",
-            0, hashMap, Check_depositor.this);
+            1, hashMap, Check_depositor.this);
     }
 
     public void onResult(boolean result)

@@ -126,17 +126,28 @@ public class SendRequest extends Activity {
                         Alert.alert_function(context, "valid");
                     }
                 }
+                // 잔액 갱신
+                else if(jsonObject.getString("mode").toString().equals("balance")) {
+                    if(jsonObject.getString("result").toString().equals("true")) {
+                        MainActivity mainActivity = (MainActivity)context;
+                        mainActivity.update_balance(jsonObject.getString("balance").toString());
+                    }
+                    else {
+                        MainActivity mainActivity = (MainActivity)context;
+                        mainActivity.update_balance("");
+                    }
+                }
                 else {
                     Alert.alert_function(context, "valid");
                 }
             }
             else {
-                Alert.alert_function(context, "fail");
+                Alert.alert_function(context, "main");
             }
         }catch (Exception e) {
             // mode가 없거나 연결이 불가능한 경우
             e.printStackTrace();
-            Alert.alert_function(context, "loading");
+            Alert.alert_function(context, "main");
         }
 
     }
