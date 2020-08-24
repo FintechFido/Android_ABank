@@ -43,7 +43,6 @@ public class Check_depositor extends Activity {
         spinner = (Spinner)findViewById(R.id.spinner_saved_select);
 
         confirm();
-        // 사용자 확인
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +54,7 @@ public class Check_depositor extends Activity {
 
     public void confirm()
     {
+        // 입금자가 존재하는지 확인
         // 서버에 확인 요청하기. 없으면 알람뜨고 뒤로가게 만들어야 함
         // send(String url, int method, final HashMap<String, String> hashMap, Context context)
         SendRequest sendRequest = new SendRequest();
@@ -64,7 +64,7 @@ public class Check_depositor extends Activity {
         hashMap.put("account_code", account);
         System.out.println("CHECK : "+hashMap);
         sendRequest.send("https://"+ SSL_Connection.getSsl_connection().get_url()+"/user/valid",
-                0, hashMap, Check_depositor.this);
+            0, hashMap, Check_depositor.this);
     }
 
     public void onResult(boolean result)
@@ -107,19 +107,19 @@ public class Check_depositor extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == 4000) {
-            // 입금자 정보 확인 실패한 경우 리턴됨
-            ;
+        if(data.hasExtra("result")) {
+            if (resultCode == 4000) {
+                if (data.getExtras().getString("result").equals("true")) {
+                    Alert.alert_function(Check_depositor.this, "transfer");
+                } else {
+                    Alert.alert_function(Check_depositor.this, "fail");
+                }
+            } else {
+                Alert.alert_function(Check_depositor.this, "fail");
+            }
         }
         else {
-            ;
-            // 2000. 송금 위해 인증까지 한 뒤 결과
-            if(getIntent().getExtras().getString("result").equals("true")) {
-                Alert.alert_function(Check_depositor.this,"transfer");
-            }
-            else {
-                Alert.alert_function(Check_depositor.this, "main");
-            }
+            Alert.alert_function(Check_depositor.this, "fail");
         }
     }
 

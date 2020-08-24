@@ -19,9 +19,11 @@ public class SSL_Connection
     private String url;
     private static SSL_Connection ssl_connection = new SSL_Connection();
 
+
     private SSL_Connection()
     {
-        url = "192.168.0.6";
+        //url = "172.30.1.55";
+        url = "172.30.1.3";
     }
 
     public static SSL_Connection getSsl_connection() {
