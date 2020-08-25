@@ -60,8 +60,8 @@ public class Check_depositor extends Activity {
         SendRequest sendRequest = new SendRequest();
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("name", name);
-        hashMap.put("bank_code", "1"); // 강제로 넣어주었음
-        hashMap.put("account_code", account);
+        hashMap.put("bank_number", "1"); // 강제로 넣어주었음
+        hashMap.put("account_number", account);
         System.out.println("CHECK : "+hashMap);
         sendRequest.send("https://"+ SSL_Connection.getSsl_connection().get_url()+"/user/valid",
             1, hashMap, Check_depositor.this);

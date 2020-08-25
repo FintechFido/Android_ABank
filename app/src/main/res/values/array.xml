@@ -4,4 +4,10 @@
         <item>오픈</item>
 
     </string-array>
+
+    <string-array name="bank_type">
+        <item>A 은행</item>
+        <item>B 은행</item>
+
+    </string-array>
 </resources>

@@ -130,7 +130,7 @@ public class SendRequest extends Activity {
                 else if(jsonObject.getString("mode").toString().equals("balance")) {
                     if(jsonObject.getString("result").toString().equals("true")) {
                         MainActivity mainActivity = (MainActivity)context;
-                        mainActivity.update_balance(jsonObject.getString("balance").toString());
+                        mainActivity.update_balance(jsonObject.getString("value").toString());
                     }
                     else {
                         MainActivity mainActivity = (MainActivity)context;
@@ -138,7 +138,7 @@ public class SendRequest extends Activity {
                     }
                 }
                 else {
-                    Alert.alert_function(context, "valid");
+                    Alert.alert_function(context, "fail");
                 }
             }
             else {
@@ -147,7 +147,7 @@ public class SendRequest extends Activity {
         }catch (Exception e) {
             // mode가 없거나 연결이 불가능한 경우
             e.printStackTrace();
-            Alert.alert_function(context, "main");
+            Alert.alert_function(context, "fail");
         }
 
     }
