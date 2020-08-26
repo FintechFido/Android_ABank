@@ -22,8 +22,6 @@ public class SSL_Connection
 
     private SSL_Connection()
     {
-        //url = "172.30.1.55";
-        //url = "172.30.1.38";
         url = "3.34.48.32:3000";
     }
 
