@@ -1,0 +1,2 @@
+rootProject.name='Fintech2020_A Bank'
+include ':app'

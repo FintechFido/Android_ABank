@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fintech2020_abank">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Loading">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".function.Check_depositor"/>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".network.SendRequest"/>
+        <activity android:name=".function.Login"/>
+        <activity android:name=".function.Transfer"/>
+        <activity android:name=".function.Call_HIDO"/>
+        <activity android:name=".function.Register_fingerprint"/>
+    </application>
+
+</manifest>
