@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bank">
+    android:background="@color/colorPrimary">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A BANK"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="208dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
