@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.fintech2020_abank.MainActivity;
 import com.example.fintech2020_abank.R;
 import com.example.fintech2020_abank.model.User;
 
@@ -49,9 +51,10 @@ public class Transfer extends Activity {
                 // 입금자 정보 확인 실패한 경우 리턴됨
                 //
             }
-            else {
-
-            }
+            else if (resultCode == 1004) {
+                setResult(1004);
+                finish();
+            } else {}
         }
     }
 
