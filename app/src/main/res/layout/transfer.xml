@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="이름"
-            android:text="홍길동"
             android:inputType="textPersonName"
             android:layout_weight="3" />
     </LinearLayout>
@@ -88,7 +87,6 @@
             android:ems="10"
             android:hint="계좌번호"
             android:inputType="textPersonName"
-            android:text="123456789000"
             android:layout_weight="3"/>
 
     </LinearLayout>
@@ -104,6 +102,7 @@
             android:layout_height="wrap_content"
             android:text="금액"
             android:textSize="30dp"
+            android:textColor="@color/darkGray"
             android:layout_weight="2"/>
 
         <EditText
@@ -114,7 +113,6 @@
             android:hint="금액"
             android:textColor="@color/darkGray"
             android:inputType="numberDecimal"
-            android:text="1000"
             android:layout_weight="3"/>
     </LinearLayout>
 
