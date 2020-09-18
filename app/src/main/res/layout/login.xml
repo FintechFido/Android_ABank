@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="141dp"
         android:text="A Bank"
-        android:textColor="@color/white"
+        android:textColor="@color/darkGray"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="@+id/et_id"
