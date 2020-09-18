@@ -153,27 +153,18 @@ public class Check_depositor extends Activity {
         if(data.hasExtra("result")) {
             if (resultCode == 4000) {
                 if (data.getExtras().getString("result").equals("true")) {
-                    /**
-                     * 송금 API 연결
-                     */
                     Date date = new Date();
                     SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
                     String today = sdfDate. format(date);
                     SimpleDateFormat sdfTime = new SimpleDateFormat("HHmmss",Locale.KOREA);
                     String now = sdfTime.format(date);
 
-
                     java.util.Random generator = new java.util.Random();
                     generator.setSeed(System.currentTimeMillis());
                     int randomInt = generator.nextInt(1000000) % 1000000;
 
-                    Log.e("TAG","확인하려구 : "+ today + "%%%" + now + " %%%%" + randomInt);
-
-
                     CooconConnection cooconConnection = CooconConnection.getSsl_connection();
                     cooconConnection.postHttps(1000, 1000);
-
-//                    Server_Connection server_connection = new Server_Connection(url,Check_depositor.this);
 
                     SendRequest sendRequest = new SendRequest();
                     HashMap<String, String> hashMap = new HashMap<String, String>();
