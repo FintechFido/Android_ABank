@@ -22,7 +22,8 @@ public class SSL_Connection
 
     private SSL_Connection()
     {
-        url = "3.34.48.32:3000";
+        //url = "3.34.48.32:3000";
+        url = "192.168.219.155:3000";
     }
 
     public static SSL_Connection getSsl_connection() {
@@ -34,7 +35,9 @@ public class SSL_Connection
         HostnameVerifier hostnameVerifier = new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {
-                if(hostname.equalsIgnoreCase("3.34.48.32"))
+                if(hostname.equalsIgnoreCase("192.168.219.155"))
+                        //"3.34.48.32"))
+                    //192.168.219.255
                     return true;
                 else
                     return false;
