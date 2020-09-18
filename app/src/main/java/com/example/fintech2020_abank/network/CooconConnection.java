@@ -23,7 +23,7 @@ public class CooconConnection
     private CooconConnection()
     {
         //url = "3.34.48.32:3000";
-        url = "192.168.219.155:3000";
+        url = "dev.checkpay.co.kr";
     }
 
     public static CooconConnection getSsl_connection() {
@@ -35,7 +35,7 @@ public class CooconConnection
         HostnameVerifier hostnameVerifier = new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {
-                if(hostname.equalsIgnoreCase("192.168.219.155") || hostname.equalsIgnoreCase("dev.checkpay.co.kr"))
+                if(hostname.equalsIgnoreCase("dev.checkpay.co.kr"))
                         //"3.34.48.32"))
                     //192.168.219.255
                     return true;
