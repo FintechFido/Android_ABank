@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <Button
         android:id="@+id/btn_login"
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="로그인"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/et_passwd"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/et_passwd"
@@ -25,7 +27,7 @@
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:textColorHighlight="@color/colorAccent"
-        android:text="아이디"
+        android:text="test"
         android:hint="아이디"
         android:maxLength="12"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:text="비밀번호"
+        android:text="1234"
         android:hint="비밀번호"
         android:maxLength="20"
         android:password="true"
@@ -56,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="141dp"
         android:text="A Bank"
+        android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="@+id/et_id"

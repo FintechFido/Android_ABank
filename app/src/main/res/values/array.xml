@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="bank_name">
-        <item>오픈</item>
+    <string-array name="bankName">
+        <item>쿠콘 뱅크</item>
 
     </string-array>
 
-    <string-array name="bank_type">
+    <string-array name="bankType">
         <item>A 은행</item>
         <item>B 은행</item>
 

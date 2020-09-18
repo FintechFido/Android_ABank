@@ -126,19 +126,15 @@ public class SendRequest extends Activity {
                         Alert.alert_function(context, "valid");
                     }
                 }
-                // 잔액 갱신
-                else if(jsonObject.getString("mode").toString().equals("balance")) {
-                    if(jsonObject.getString("result").toString().equals("true")) {
-                        MainActivity mainActivity = (MainActivity)context;
-                        mainActivity.update_balance(jsonObject.getString("value").toString());
-                    }
-                    else {
-                        MainActivity mainActivity = (MainActivity)context;
-                        mainActivity.update_balance("");
-                    }
-                }
                 else {
                     Alert.alert_function(context, "fail");
+                }
+            } else if(jsonObject.getString("TRAN_DIV").equals("301")){
+                if(jsonObject.getString("REPY_CD").equals("0000")) {
+                    Check_depositor check_depositor = (Check_depositor) context;
+                    check_depositor.onDepositResult(true);
+                } else {
+                    Alert.alert_function(context, "depositor_fail");
                 }
             }
             else {

@@ -3,7 +3,10 @@ package com.example.fintech2020_abank.function;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.example.fintech2020_abank.MainActivity;
 import com.example.fintech2020_abank.R;
 import com.example.fintech2020_abank.model.User;
 import com.example.fintech2020_abank.network.SSL_Connection;
@@ -72,9 +75,11 @@ public class Register_fingerprint extends Activity {
         if(data.hasExtra("result")){
             if(data.getExtras().getString("result").toString().equals("true")) {
                 Alert.alert_function(Register_fingerprint.this, "register");
-            }
-            else {
-                Alert.alert_function(Register_fingerprint.this, "main");
+            } else {
+                Intent intent = new Intent(Register_fingerprint.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         }
         else {

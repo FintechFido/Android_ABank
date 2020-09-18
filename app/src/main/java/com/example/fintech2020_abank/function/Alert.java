@@ -37,7 +37,7 @@ public class Alert extends AppCompatActivity {
         }
         else if(mode.equals("transfer")){
             builder.setTitle("알림").setMessage("송금이 완료되었습니다");
-            setneutralButton("main",context);
+           setneutralButton("transfer",context);
             // 송금 완료 페이지던 상대 확인 페이지던 이동해야할 것 같음
         }
         else if(mode.equals("fail")){
@@ -51,6 +51,14 @@ public class Alert extends AppCompatActivity {
         else if(mode.equals("valid")){
             builder.setTitle("알림").setMessage("입금자 정보를 다시 확인해주세요");
             setneutralButton("return",context);
+        }
+        else if(mode.equals("depositor_fail")){
+            builder.setTitle("알림").setMessage("송금이 실패하였습니다");
+            setneutralButton("return",context);
+        }
+        else if(mode.equals("no_money")){
+            builder.setTitle("알림").setMessage("잔액이 0원입니다");
+            setneutralButton("main",context);
         }
     }
 
@@ -90,6 +98,13 @@ public class Alert extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+                }
+            });
+        }
+        else if(mode.equals("transfer")){
+            builder.setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                 }
             });
         }

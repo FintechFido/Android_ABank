@@ -3,18 +3,26 @@ package com.example.fintech2020_abank.function;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fintech2020_abank.Loading;
 import com.example.fintech2020_abank.R;
 import com.example.fintech2020_abank.model.User;
+import com.example.fintech2020_abank.network.CooconConnection;
 import com.example.fintech2020_abank.network.SSL_Connection;
 import com.example.fintech2020_abank.network.SendRequest;
+import com.example.fintech2020_abank.network.Server_Connection;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Check_depositor extends Activity {
 
@@ -26,7 +34,26 @@ public class Check_depositor extends Activity {
     private Button btn;
     private Spinner spinner;
 
-    // 뒤로가기 하면 처리되도록 해야 한다
+    private String url = "dev.checkpay.co.kr/HKT_API_301.jct";
+
+    private long backKeyPressedTime = 0;
+    private Toast toast;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            toast.show();
+        }
+        else if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            // send(String url, int method, final HashMap<String, String> hashMap, Context context)
+            SendRequest sendRequest = new SendRequest();
+            HashMap<String, String> hashMap = new HashMap<String, String>();
+            hashMap.put("session_key", User.getInstance().get_session_key());
+            sendRequest.send("https://"+ SSL_Connection.getSsl_connection().get_url()+"/logout",
+                    1, hashMap, Check_depositor.this);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +110,22 @@ public class Check_depositor extends Activity {
         }
     }
 
+    public void onDepositResult(boolean result)
+    {
+        if(result) {
+            SSL_Connection ssl_connection = SSL_Connection.getSsl_connection();
+            ssl_connection.postHttps(1000, 1000);
+            Intent intent = new Intent();
+            setResult(1004,intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent();
+            setResult(3000,intent);
+            finish();
+        }
+    }
+
     public void transfer_auth() {
         // 송금 및 인증
 
@@ -110,7 +153,42 @@ public class Check_depositor extends Activity {
         if(data.hasExtra("result")) {
             if (resultCode == 4000) {
                 if (data.getExtras().getString("result").equals("true")) {
-                    Alert.alert_function(Check_depositor.this, "transfer");
+                    /**
+                     * 송금 API 연결
+                     */
+                    Date date = new Date();
+                    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+                    String today = sdfDate. format(date);
+                    SimpleDateFormat sdfTime = new SimpleDateFormat("HHmmss",Locale.KOREA);
+                    String now = sdfTime.format(date);
+
+
+                    java.util.Random generator = new java.util.Random();
+                    generator.setSeed(System.currentTimeMillis());
+                    int randomInt = generator.nextInt(1000000) % 1000000;
+
+                    Log.e("TAG","확인하려구 : "+ today + "%%%" + now + " %%%%" + randomInt);
+
+
+                    CooconConnection cooconConnection = CooconConnection.getSsl_connection();
+                    cooconConnection.postHttps(1000, 1000);
+
+//                    Server_Connection server_connection = new Server_Connection(url,Check_depositor.this);
+
+                    SendRequest sendRequest = new SendRequest();
+                    HashMap<String, String> hashMap = new HashMap<String, String>();
+                    hashMap.put("OGN_CD", "00000000");
+                    hashMap.put("CUST_ID", name);
+                    hashMap.put("TRAN_DT", today);
+                    hashMap.put("TRAN_TM", now);
+                    hashMap.put("TRAN_DIV", "301");
+                    hashMap.put("TRAN_SEQ", String.valueOf(randomInt));
+                    hashMap.put("BNK_CD", "003");
+                    hashMap.put("ACCT_NO", account);
+                    hashMap.put("TRAN_AMT", price);
+                    System.out.println("CHECK : "+hashMap);
+                    sendRequest.send("https://"+ url,
+                            1, hashMap, Check_depositor.this);
                 } else {
                     Alert.alert_function(Check_depositor.this, "fail");
                 }

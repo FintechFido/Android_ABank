@@ -13,20 +13,20 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class SSL_Connection
+public class CooconConnection
 {
     // 싱글톤 패턴
     private String url;
-    private static SSL_Connection ssl_connection = new SSL_Connection();
+    private static CooconConnection ssl_connection = new CooconConnection();
 
 
-    private SSL_Connection()
+    private CooconConnection()
     {
         //url = "3.34.48.32:3000";
-        url = "192.168.219.155:3000";
+        url = "dev.checkpay.co.kr";
     }
 
-    public static SSL_Connection getSsl_connection() {
+    public static CooconConnection getSsl_connection() {
         return ssl_connection;
     }
 
@@ -35,7 +35,7 @@ public class SSL_Connection
         HostnameVerifier hostnameVerifier = new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {
-                if(hostname.equalsIgnoreCase("192.168.219.155"))
+                if(hostname.equalsIgnoreCase("dev.checkpay.co.kr"))
                         //"3.34.48.32"))
                     //192.168.219.255
                     return true;
@@ -49,8 +49,8 @@ public class SSL_Connection
     private void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return new java.security.cert.X509Certificate[] {};
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[] {};
             }
 
             @Override
